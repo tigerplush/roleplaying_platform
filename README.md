@@ -15,3 +15,10 @@ add `+` to Web origins in Clients/account-console, add `http://localhost:4200/*`
 and `ng serve`.
 
 You might have to call `npm install -g @angular/cli` once in order to install the angular cli that provides `ng`. You also have to install nodejs.org (I recommend on windows to install it via the Windows installer .msi, not fnm)
+
+## Keycloak Setup
+
+1. In clients/account-console/Client scopes, click on account-console-dedicated
+    1. Add 'client coles' to the mappers and add 'default-roles-corgi' to the scope
+
+I'm very unsure how this should be configured correctly, but for now it works.
