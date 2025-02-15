@@ -17,7 +17,9 @@ export class NavigationComponent {
     this.keycloak.login();
   }
   logout() {
-    this.keycloak.logout();
+    this.keycloak.logout({
+      redirectUri: window.location.origin
+    });
   }
 
 }

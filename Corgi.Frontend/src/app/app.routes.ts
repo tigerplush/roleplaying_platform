@@ -8,13 +8,19 @@ import { canActivateAuthRole } from './auth.guard';
 export const routes: Routes = [
     {
         path: '',
-        component: DashboardComponent,
-        canActivate: [canActivateAuthRole]
+        redirectTo: '/home',
+        pathMatch: 'full'
     },
-    // {
-    //     path: '',
-    //     component: HomeComponent
-    // },
+    {
+        path: 'home',
+        component: HomeComponent
+    },
+    {
+        path: 'dashboard',
+        component: DashboardComponent,
+        canActivate: [canActivateAuthRole],
+        data: { role: 'default-roles-corgi' }
+    },
     {
         path: 'forbidden',
         component: ForbiddenComponent
