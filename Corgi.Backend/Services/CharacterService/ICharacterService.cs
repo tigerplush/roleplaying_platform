@@ -4,6 +4,7 @@ namespace Corgi.Backend.Services.CharacterService
 {
     public interface ICharacterService
     {
-        public Task<Character> GetCharacterById(Guid id);
+        public Task<Character> GetCharacterByIdAsync(Guid id);
+        public Task<Character> AddCharacterAsync();
     }
 }

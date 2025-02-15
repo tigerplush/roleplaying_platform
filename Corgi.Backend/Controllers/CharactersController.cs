@@ -16,14 +16,21 @@ namespace Corgi.Backend.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<Character>> GetCharacterById()
+        public async Task<ActionResult<Character>> GetCharacterByIdAsync()
         {
-            Character character = await _characterService.GetCharacterById(Guid.NewGuid());
+            Character character = await _characterService.GetCharacterByIdAsync(Guid.NewGuid());
             if (character == null)
             {
                 return NotFound();
             }
             return Ok(character);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult<Character>> AddCharacterAsync()
+        {
+            Character charcater = await _characterService.AddCharacterAsync();
+            return Ok(charcater);
         }
     }
 }

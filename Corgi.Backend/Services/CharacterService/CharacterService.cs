@@ -11,11 +11,18 @@ namespace Corgi.Backend.Services.CharacterService
             _context = context;
         }
 
-        public async Task<Character> GetCharacterById(Guid id)
+        public async Task<Character> GetCharacterByIdAsync(Guid id)
         {
             return await _context
                 .Characters
                 .FirstOrDefaultAsync(character => character.Id == id);
+        }
+        public async Task<Character> AddCharacterAsync()
+        {
+            Character character = new Character();
+            await _context.Characters.AddAsync(character);
+            await _context.SaveChangesAsync();
+            return character;
         }
     }
 }
