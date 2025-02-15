@@ -1,0 +1,5 @@
+@if (!keycloak.authenticated) {
+<button mat-flat-button (click)="login()">Login</button>
+} @else {
+<button mat-flat-button class="action-item" (click)="logout()">Logout</button>
+}
