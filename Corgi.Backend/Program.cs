@@ -1,6 +1,8 @@
 using Corgi.Backend;
 using Corgi.Backend.Services.CharacterService;
 using Microsoft.EntityFrameworkCore;
+using Steeltoe.Connector.PostgreSql;
+using Steeltoe.Connector.PostgreSql.EFCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,8 +16,11 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<DatabaseContext>(options =>
 {
-    options.UseNpgsql();
+    options.UseNpgsql(builder.Configuration);
 });
+
+builder.Services.AddPostgresHealthContributor(builder.Configuration);
+
 
 var app = builder.Build();
 
@@ -31,5 +36,9 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+var scope = app.Services.CreateScope();
+var dbContext = scope.ServiceProvider.GetRequiredService<DatabaseContext>();
+await dbContext.Database.MigrateAsync();
 
 app.Run();
