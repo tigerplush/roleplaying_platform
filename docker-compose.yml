@@ -1,0 +1,60 @@
+services:
+  corgi-frontend:
+    build:
+      context: ./Corgi.Frontend/
+      dockerfile: Dockerfile
+    ports:
+      - 4200:4200
+  corgi-backend:
+    build:
+      context: ./Corgi.Backend/
+      dockerfile: Dockerfile
+    ports:
+      - 8081:8080
+    depends_on:
+      - corgi-db
+  corgi-db:
+    image: postgres:latest
+    restart: "no"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - 5432:5432
+    volumes:
+      - corgi-db-data:/var/lib/postgresql/data
+  keycloak:
+    image: quay.io/keycloak/keycloak:26.1
+    environment:
+      KC_DB: postgres
+      KC_DB_URL_HOST: keycloak-db
+      KC_DB_URL_PORT: 5432
+      KC_DB_URL_DATABASE: keycloak
+      KC_DB_USERNAME: keycloak
+      KC_DB_PASSWORD: keycloak
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: Pa55w0rd
+      KC_HEALTH_ENABLED: true
+      KC_METRICS_ENABLED: true
+    ports:
+      - 8080:8080
+    command:
+      - start-dev
+    depends_on:
+      - keycloak-db
+  keycloak-db:
+    image: postgres:latest
+    restart: "no"
+    environment:
+      - POSTGRES_USER=keycloak
+      - POSTGRES_PASSWORD=keycloak
+    ports:
+      - 5433:5432
+    volumes:
+      - keycloak-db-data:/var/lib/postgresql/data
+
+volumes:
+  corgi-db-data:
+    driver: local
+  keycloak-db-data:
+    driver: local
