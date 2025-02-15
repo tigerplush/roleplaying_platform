@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35806.99 d17.13
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Corgi.Backend", "Corgi.Backend.csproj", "{1663CF87-3A9D-4AA4-8B73-9ED6FAF171DA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1663CF87-3A9D-4AA4-8B73-9ED6FAF171DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1663CF87-3A9D-4AA4-8B73-9ED6FAF171DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1663CF87-3A9D-4AA4-8B73-9ED6FAF171DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1663CF87-3A9D-4AA4-8B73-9ED6FAF171DA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CD907C6F-73CF-44B7-9B2B-31D1C6E9B57F}
+	EndGlobalSection
+EndGlobal
