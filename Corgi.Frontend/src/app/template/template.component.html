@@ -1,4 +1,11 @@
 <div *ngIf="template !== undefined">
     <h1>{{ template.name }} Template</h1>
     <button mat-icon (click)="onDelete()"><mat-icon>delete</mat-icon></button>
+    <div class="fields">
+
+        <app-template-field *ngFor="let field of template.fields" [field]="field"></app-template-field>
+        <button mat-icon-button (click)="onAddField()">
+            <mat-icon>add</mat-icon>
+        </button>
+    </div>
 </div>

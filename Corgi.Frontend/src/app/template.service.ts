@@ -4,6 +4,8 @@ import { environment } from '../environments/environment';
 import { AddTemplateDtoV1 } from './add-template-dto-v1';
 import { GetTemplateDtoV1 } from './get-template-dto-v1';
 import { TemplateResponseDtoV1 } from './template-response-dto-v1';
+import { GetTemplateFieldDtoV1 } from './get-template-field-dto-v1';
+import { AddTemplateFieldDtoV1 } from './add-template-field-dto-v1';
 
 @Injectable({
   providedIn: 'root'
@@ -26,5 +28,9 @@ export class TemplateService {
 
   deleteTemplateById(id: string) {
     return this.http.delete(environment.baseUrl + this.resource + '/' + id);
+  }
+
+  addTemplateField(id: string) {
+    return this.http.post<GetTemplateFieldDtoV1>(environment.baseUrl + this.resource + '/' + id + '/fields', new AddTemplateFieldDtoV1());
   }
 }

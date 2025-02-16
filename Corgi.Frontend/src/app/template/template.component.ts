@@ -5,10 +5,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { TemplateFieldComponent } from "../template-field/template-field.component";
 
 @Component({
   selector: 'app-template',
-  imports: [ CommonModule, MatIconModule, MatButtonModule ],
+  imports: [CommonModule, MatIconModule, MatButtonModule, TemplateFieldComponent],
   templateUrl: './template.component.html',
   styleUrl: './template.component.scss'
 })
@@ -38,5 +39,11 @@ export class TemplateComponent {
     this.templateService.deleteTemplateById(this.template.id).subscribe({
       next: _ => this.router.navigate(['/templates'])
     })
+  }
+
+  onAddField() {
+    this.templateService.addTemplateField(this.template.id).subscribe({
+      next: field => this.template.fields.push(field)
+    });
   }
 }
