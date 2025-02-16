@@ -1,16 +1,24 @@
 import { CommonModule } from '@angular/common';
-import { Component, effect } from '@angular/core';
+import { Component } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
+import { MatTabsModule } from '@angular/material/tabs';
+import { Router } from '@angular/router';
 import Keycloak from 'keycloak-js';
 
 @Component({
   selector: 'app-navigation',
-  imports: [ CommonModule, MatButtonModule ],
+  imports: [ CommonModule, MatButtonModule, MatTabsModule ],
   templateUrl: './navigation.component.html',
   styleUrl: './navigation.component.scss'
 })
 export class NavigationComponent {
-  constructor(public keycloak: Keycloak) {
+  private routings: string[] = ['/dashboard', '/characters', '/templates']
+  constructor(public keycloak: Keycloak, private router: Router) {
+  }
+
+  ngOnInit()
+  {
+
   }
 
   login() {
@@ -22,4 +30,7 @@ export class NavigationComponent {
     });
   }
 
+  set test(value: number) {
+    this.router.navigate([this.routings[value]]);
+  }
 }

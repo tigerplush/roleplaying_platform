@@ -1,5 +1,12 @@
-@if (!keycloak.authenticated) {
-<button mat-flat-button (click)="login()">Login</button>
-} @else {
-<button mat-flat-button class="action-item" (click)="logout()">Logout</button>
-}
+<div class="navigation">
+    <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start" [(selectedIndex)]="test">
+        <mat-tab label="Dashboard" />
+        <mat-tab label="Characters" />
+        <mat-tab label="Templates" />
+    </mat-tab-group>
+    @if (!keycloak.authenticated) {
+    <button mat-flat-button (click)="login()">Login</button>
+    } @else {
+    <button mat-flat-button class="action-item" (click)="logout()">Logout</button>
+    }
+</div>

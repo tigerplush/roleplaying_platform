@@ -29,6 +29,12 @@ export const routes: Routes = [
         data: { role: 'default-roles-corgi' }
     },
     {
+        path: 'characters',
+        component: NotFoundComponent,
+        canActivate: [canActivateAuthRole],
+        data: { role: 'default-roles-corgi' }
+    },
+    {
         path: 'templates',
         component: TemplateOverviewComponent,
         canActivate: [canActivateAuthRole],
