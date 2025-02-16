@@ -1,1 +1,12 @@
-<p>create-template-dialog works!</p>
+<h2 mat-dialog-title>Create new template</h2>
+<mat-dialog-content>
+    <p>Name of the new template</p>
+    <mat-form-field>
+      <mat-label>Template name</mat-label>
+      <input matInput [(ngModel)]="name" />
+    </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button mat-button [mat-dialog-close]>Cancel</button>
+    <button mat-button (click)="onConfirm()" cdkFocusInitial>Confirm</button>
+</mat-dialog-actions>

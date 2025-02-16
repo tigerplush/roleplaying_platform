@@ -32,5 +32,22 @@ namespace Corgi.Backend.Services.TemplateService
         {
             return await _context.Templates.FirstOrDefaultAsync(template => template.Id == id);
         }
+
+        public async Task<Template> CreateNewTemplateAsync(string name)
+        {
+            Template template = new()
+            {
+                Name = name
+            };
+            await _context.Templates.AddAsync(template);
+            await _context.SaveChangesAsync();
+            return template;
+        }
+
+
+        public async Task<Template[]> GetAllTemplatesAsync()
+        {
+            return await _context.Templates.ToArrayAsync();
+        }
     }
 }

@@ -1,1 +1,4 @@
-<p>template works!</p>
+<div *ngIf="template !== undefined">
+    <h1>{{ template.name }} Template</h1>
+    <button mat-icon (click)="onDelete()"><mat-icon>delete</mat-icon></button>
+</div>

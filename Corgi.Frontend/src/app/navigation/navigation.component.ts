@@ -30,6 +30,8 @@ export class NavigationComponent {
   }
 
   set test(value: number) {
-    this.router.navigate([this.routings[value]]);
+    this.router.navigate([this.routings[value]], {
+      onSameUrlNavigation: 'reload'
+    });
   }
 }
