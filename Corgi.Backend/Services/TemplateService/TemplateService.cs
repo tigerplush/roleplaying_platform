@@ -30,7 +30,11 @@ namespace Corgi.Backend.Services.TemplateService
 
         public async Task<Template> GetTemplateByIdAsync(Guid id)
         {
-            return await _context.Templates.FirstOrDefaultAsync(template => template.Id == id);
+            return await _context
+                .Templates
+                .Where(template => template.Id == id)
+                .Include(template => template.Fields)
+                .FirstOrDefaultAsync();
         }
 
         public async Task<Template> CreateNewTemplateAsync(string name)
