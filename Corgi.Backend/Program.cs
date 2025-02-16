@@ -1,5 +1,6 @@
 using Corgi.Backend;
 using Corgi.Backend.Services.CharacterService;
+using Corgi.Backend.Services.TemplateService;
 using Corgi.Backend.Services.UserService;
 using Microsoft.EntityFrameworkCore;
 using Steeltoe.Connector.PostgreSql;
@@ -10,6 +11,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddScoped<ICharacterService, CharacterService>();
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<ITemplateService, TemplateService>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
