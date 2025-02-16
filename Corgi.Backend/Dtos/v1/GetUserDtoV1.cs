@@ -6,7 +6,7 @@ namespace Corgi.Backend.Dtos.v1
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
-        public List<Character> Characters { get; set; } = [];
+        public List<GetCharacterDtoV1> Characters { get; set; } = [];
         public DateTime CreatedAt { get; set; }
         public DateTime LastModified { get; set; }
     }

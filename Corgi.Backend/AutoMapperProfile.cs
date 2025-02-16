@@ -9,6 +9,7 @@ namespace Corgi.Backend
         public AutoMapperProfile()
         {
             CreateMap<User, GetUserDtoV1>();
+            CreateMap<Character, GetCharacterDtoV1>();
         }
     }
 }
