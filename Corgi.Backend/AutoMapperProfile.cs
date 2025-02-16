@@ -10,6 +10,8 @@ namespace Corgi.Backend
         {
             CreateMap<User, GetUserDtoV1>();
             CreateMap<Character, GetCharacterDtoV1>();
+            CreateMap<Template, GetTemplateDtoV1>();
+            CreateMap<TemplateField, GetTemplateFieldDtoV1>();
         }
     }
 }
