@@ -13,17 +13,16 @@ import Keycloak from 'keycloak-js';
 })
 export class NavigationComponent {
   private routings: string[] = ['/dashboard', '/characters', '/templates']
-  constructor(public keycloak: Keycloak, private router: Router) {
+  constructor(protected keycloak: Keycloak, private router: Router) {
   }
 
-  ngOnInit()
-  {
-
+  ngOnInit() {
   }
 
   login() {
     this.keycloak.login();
   }
+
   logout() {
     this.keycloak.logout({
       redirectUri: window.location.origin
