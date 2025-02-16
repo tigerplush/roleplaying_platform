@@ -11,7 +11,7 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
-  createNewUser(user: AddUserDtoV1) {
-    return this.http.post(environment.baseUrl + this.resource, user);
+  createOrUpdateUser(user: AddUserDtoV1) {
+    return this.http.put(environment.baseUrl + this.resource, user);
   }
 }

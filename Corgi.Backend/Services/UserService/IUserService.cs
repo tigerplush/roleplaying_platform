@@ -6,5 +6,6 @@ namespace Corgi.Backend.Services.UserService
     {
         public Task<User> CreateNewUserAsync(Guid id, string name);
         public Task<User> GetUserByIdAsync(Guid id);
+        public Task<User> UpdateUserAsync(User user);
     }
 }

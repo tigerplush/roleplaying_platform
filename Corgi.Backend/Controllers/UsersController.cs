@@ -1,4 +1,5 @@
-﻿using Corgi.Backend.Dtos.v1;
+﻿using AutoMapper;
+using Corgi.Backend.Dtos.v1;
 using Corgi.Backend.Models;
 using Corgi.Backend.Services.UserService;
 using Microsoft.AspNetCore.Http;
@@ -11,22 +12,28 @@ namespace Corgi.Backend.Controllers
     public class UsersController : ControllerBase
     {
         private readonly IUserService _userService;
+        private readonly IMapper _mapper;
 
-        public UsersController(IUserService userService)
+        public UsersController(
+            IUserService userService,
+            IMapper mapper
+            )
         {
             _userService = userService;
+            _mapper = mapper;
         }
 
-        [HttpPost]
-        public async Task<ActionResult<GetUserDtoV1>> CreateNewUserAsync(AddUserDtoV1 userDto)
+        [HttpPut]
+        public async Task<ActionResult<GetUserDtoV1>> CreateOrUpdateUserAsync(AddUserDtoV1 userDto)
         {
             User existingUser = await _userService.GetUserByIdAsync(userDto.Id);
             if(existingUser != null)
             {
-                return Conflict();
+                existingUser = await _userService.UpdateUserAsync(existingUser);
+                return Ok(_mapper.Map<GetUserDtoV1>(existingUser));
             }
             User user = await _userService.CreateNewUserAsync(userDto.Id, userDto.Name);
-            return Ok(user);
+            return Ok(_mapper.Map<GetUserDtoV1>(user));
         }
     }
 }

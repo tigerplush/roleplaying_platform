@@ -30,5 +30,11 @@ namespace Corgi.Backend.Services.UserService
                 .Users
                 .FirstOrDefaultAsync(user => user.Id == id);
         }
+        public async Task<User> UpdateUserAsync(User user)
+        {
+            user.LastModified = DateTime.UtcNow;
+            await _context.SaveChangesAsync();
+            return user;
+        }
     }
 }
