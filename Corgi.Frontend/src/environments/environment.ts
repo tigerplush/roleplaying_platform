@@ -1,5 +1,6 @@
 export const environment = {
     keycloakUrl: '',
     keycloakRealm: '',
-    keycloakClientId: ''
+    keycloakClientId: '',
+    baseUrl: ''
 };
