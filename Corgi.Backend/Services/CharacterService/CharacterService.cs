@@ -19,7 +19,7 @@ namespace Corgi.Backend.Services.CharacterService
         }
         public async Task<Character> AddCharacterAsync()
         {
-            Character character = new Character();
+            Character character = new ();
             await _context.Characters.AddAsync(character);
             await _context.SaveChangesAsync();
             return character;

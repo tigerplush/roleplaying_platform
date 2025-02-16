@@ -1,6 +1,8 @@
-﻿namespace Corgi.Backend.Models
+﻿using Corgi.Backend.Models;
+
+namespace Corgi.Backend.Dtos.v1
 {
-    public class User : ICreatedAt, ILastModified
+    public class GetUserDtoV1
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
