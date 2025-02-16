@@ -5,6 +5,7 @@ import { ForbiddenComponent } from './forbidden/forbidden.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { canActivateAuthRole } from './auth.guard';
 import { AfterLoginComponent } from './after-login/after-login.component';
+import { TemplateComponent } from './template/template.component';
 import { TemplateOverviewComponent } from './template-overview/template-overview.component';
 
 export const routes: Routes = [
@@ -30,6 +31,12 @@ export const routes: Routes = [
     {
         path: 'templates',
         component: TemplateOverviewComponent,
+        canActivate: [canActivateAuthRole],
+        data: { role: 'default-roles-corgi' }
+    },
+    {
+        path: 'templates/:id',
+        component: TemplateComponent,
         canActivate: [canActivateAuthRole],
         data: { role: 'default-roles-corgi' }
     },
