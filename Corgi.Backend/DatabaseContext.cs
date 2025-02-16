@@ -7,6 +7,8 @@ namespace Corgi.Backend
     {
         public DbSet<User> Users { get; set; }
         public DbSet<Character> Characters { get; set; }
+        public DbSet<Template> Templates { get; set; }
+        public DbSet<TemplateField> TemplateFields { get; set; }
 
         public DatabaseContext(DbContextOptions<DatabaseContext> options): base(options)
         {
