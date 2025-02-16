@@ -8,5 +8,6 @@ namespace Corgi.Backend.Services.TemplateService
         public Task<Template> GetTemplateByIdAsync(Guid id);
         public Task<Template> CreateNewTemplateAsync(string name);
         public Task<Template[]> GetAllTemplatesAsync();
+        public Task<TemplateField> AddTemplateFieldToTemplateAsync(Template template);
     }
 }

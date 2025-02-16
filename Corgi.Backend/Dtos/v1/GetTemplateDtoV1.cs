@@ -1,6 +1,4 @@
-﻿using Corgi.Backend.Models;
-
-namespace Corgi.Backend.Dtos.v1
+﻿namespace Corgi.Backend.Dtos.v1
 {
     public class GetTemplateDtoV1
     {

@@ -14,6 +14,14 @@ namespace Corgi.Backend
         {
         }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder
+                .Entity<TemplateField>()
+                .Property(e => e.FieldType)
+                .HasConversion<string>();
+        }
+
         public override int SaveChanges()
         {
             throw new NotImplementedException();

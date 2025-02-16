@@ -16,11 +16,14 @@ namespace Corgi.Backend.Services.TemplateService
         {
             Template template = await _context
                 .Templates
-                .FirstOrDefaultAsync(template => template.Id == id);
+                .Where(template => template.Id == id)
+                .Include(template => template.Fields)
+                .FirstOrDefaultAsync();
 
             if(template != null)
             {
-                _context.Remove(template);
+                _context.TemplateFields.RemoveRange(template.Fields);
+                _context.Templates.Remove(template);
                 await _context.SaveChangesAsync();
                 return true;
             }
@@ -52,6 +55,16 @@ namespace Corgi.Backend.Services.TemplateService
         public async Task<Template[]> GetAllTemplatesAsync()
         {
             return await _context.Templates.ToArrayAsync();
+        }
+        public async Task<TemplateField> AddTemplateFieldToTemplateAsync(Template template)
+        {
+            TemplateField field = new()
+            {
+                Owner = template
+            };
+            template.Fields.Add(field);
+            await _context.SaveChangesAsync();
+            return field;
         }
     }
 }

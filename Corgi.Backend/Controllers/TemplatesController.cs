@@ -24,6 +24,7 @@ namespace Corgi.Backend.Controllers
         }
 
         [HttpGet]
+        [ProducesResponseType(typeof(TemplateResponseDtoV1), StatusCodes.Status200OK)]
         public async Task<ActionResult<TemplateResponseDtoV1>> GetAllTemplatesAsync()
         {
             Template[] templates = await _templateService.GetAllTemplatesAsync();
@@ -34,11 +35,11 @@ namespace Corgi.Backend.Controllers
         }
 
         [HttpPost]
-        [ProducesResponseType(typeof(GetTemplateDtoV1), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(GetTemplateDtoV1), StatusCodes.Status201Created)]
         public async Task<ActionResult<GetTemplateDtoV1>> CreateNewTemplateAsync(AddTemplateDtoV1 newTemplate)
         {
             Template template = await _templateService.CreateNewTemplateAsync(newTemplate.Name);
-            return Ok(_mapper.Map<GetTemplateDtoV1>(template));
+            return Created($"{Url.Action()}/{template.Id}", _mapper.Map<GetTemplateDtoV1>(template));
         }
 
         [HttpDelete("{id}")]
@@ -54,20 +55,23 @@ namespace Corgi.Backend.Controllers
             return NoContent();
         }
 
-        [HttpPost("{id}")]
+        [HttpPost("{id}/fields")]
+        [ProducesResponseType(typeof(GetTemplateFieldDtoV1), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<GetTemplateFieldDtoV1>> AddTemplateFieldToTemplateAsync([FromRoute] Guid id)
+        public async Task<ActionResult<GetTemplateFieldDtoV1>> AddTemplateFieldToTemplateAsync([FromRoute] Guid id, AddTemplateFieldDtoV1 newField)
         {
             Template template = await _templateService.GetTemplateByIdAsync(id);
             if(template == null)
             {
                 return NotFound();
             }
-            return Ok();
+            TemplateField field = await _templateService.AddTemplateFieldToTemplateAsync(template);
+            return Created($"{Url.Action()}/{field.Id}", _mapper.Map<GetTemplateFieldDtoV1>(field));
         }
 
         [HttpGet("{id}")]
         [ProducesResponseType(typeof(GetTemplateDtoV1), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<GetTemplateDtoV1>> GetTemplateByIdAsync([FromRoute] Guid id)
         {
             Template template = await _templateService.GetTemplateByIdAsync(id);
