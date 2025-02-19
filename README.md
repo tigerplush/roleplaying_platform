@@ -22,3 +22,4 @@ You might have to call `npm install -g @angular/cli` once in order to install th
     1. Add 'client coles' to the mappers and add 'default-roles-corgi' to the scope
 
 I'm very unsure how this should be configured correctly, but for now it works.
+https://stackoverflow.com/questions/54796791/importing-keycloak-configuration-files-while-using-docker-compose
