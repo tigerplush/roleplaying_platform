@@ -66,5 +66,21 @@ namespace Corgi.Backend.Services.TemplateService
             await _context.SaveChangesAsync();
             return field;
         }
+        public async Task<TemplateField> UpdateTemplateFieldAsync(TemplateField field, TemplateField update)
+        {
+            field.Name = update.Name;
+            field.FieldType = update.FieldType;
+            field.Value = update.Value;
+            field.IsVisible = update.IsVisible;
+            await _context.SaveChangesAsync();
+            return field;
+        }
+
+        public async Task DeleteTemplateFieldAsync(Template template, TemplateField field)
+        {
+            template.Fields.Remove(field);
+            _context.TemplateFields.Remove(field);
+            await _context.SaveChangesAsync();
+        }
     }
 }

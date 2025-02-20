@@ -42,12 +42,12 @@ namespace Corgi.Backend.Controllers
             return Created($"{Url.Action()}/{template.Id}", _mapper.Map<GetTemplateDtoV1>(template));
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("{templateId}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult> DeleteTemplateAsync([FromRoute] Guid id)
+        public async Task<ActionResult> DeleteTemplateAsync([FromRoute] Guid templateId)
         {
-            bool success = await _templateService.DeleteTemplateAsync(id);
+            bool success = await _templateService.DeleteTemplateAsync(templateId);
             if(!success)
             {
                 return NotFound();
@@ -55,12 +55,12 @@ namespace Corgi.Backend.Controllers
             return NoContent();
         }
 
-        [HttpPost("{id}/fields")]
+        [HttpPost("{templateId}/fields")]
         [ProducesResponseType(typeof(GetTemplateFieldDtoV1), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<GetTemplateFieldDtoV1>> AddTemplateFieldToTemplateAsync([FromRoute] Guid id, AddTemplateFieldDtoV1 newField)
+        public async Task<ActionResult<GetTemplateFieldDtoV1>> AddTemplateFieldToTemplateAsync([FromRoute] Guid templateId, AddTemplateFieldDtoV1 newField)
         {
-            Template template = await _templateService.GetTemplateByIdAsync(id);
+            Template template = await _templateService.GetTemplateByIdAsync(templateId);
             if(template == null)
             {
                 return NotFound();
@@ -69,17 +69,55 @@ namespace Corgi.Backend.Controllers
             return Created($"{Url.Action()}/{field.Id}", _mapper.Map<GetTemplateFieldDtoV1>(field));
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{templateId}")]
         [ProducesResponseType(typeof(GetTemplateDtoV1), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<GetTemplateDtoV1>> GetTemplateByIdAsync([FromRoute] Guid id)
+        public async Task<ActionResult<GetTemplateDtoV1>> GetTemplateByIdAsync([FromRoute] Guid templateId)
         {
-            Template template = await _templateService.GetTemplateByIdAsync(id);
+            Template template = await _templateService.GetTemplateByIdAsync(templateId);
             if(template == null)
             {
                 return NotFound();
             }
             return Ok(_mapper.Map<GetTemplateDtoV1>(template));
+        }
+
+        [HttpPut("{templateId}/fields/{fieldId}")]
+        [ProducesResponseType(typeof(GetTemplateFieldDtoV1), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<ActionResult<GetTemplateFieldDtoV1>> UpdateTemplateByIdAsync([FromRoute] Guid templateId, [FromRoute] Guid fieldId, UpdateTemplateFieldDtoV1 update)
+        {
+            Template template = await _templateService.GetTemplateByIdAsync(templateId);
+            if (template == null)
+            {
+                return NotFound();
+            }
+            TemplateField field = template.Fields.FirstOrDefault(field => field.Id == fieldId);
+            if(field == null)
+            {
+                return NotFound();
+            }
+            await _templateService.UpdateTemplateFieldAsync(field, _mapper.Map<TemplateField>(update));
+            return Ok(_mapper.Map<GetTemplateFieldDtoV1>(field));
+        }
+
+        [HttpDelete("{templateId}/fields/{fieldId}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<ActionResult> DeleteTemplateFieldByIdAsync([FromRoute] Guid templateId, [FromRoute] Guid fieldId)
+        {
+            Template template = await _templateService.GetTemplateByIdAsync(templateId);
+            if (template == null)
+            {
+                return NotFound();
+            }
+            TemplateField field = template.Fields.FirstOrDefault(field => field.Id == fieldId);
+            if (field == null)
+            {
+                return NotFound();
+            }
+            await _templateService.DeleteTemplateFieldAsync(template, field);
+            return NoContent();
         }
     }
 }

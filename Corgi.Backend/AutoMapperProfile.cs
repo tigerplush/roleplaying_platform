@@ -12,6 +12,7 @@ namespace Corgi.Backend
             CreateMap<Character, GetCharacterDtoV1>();
             CreateMap<Template, GetTemplateDtoV1>();
             CreateMap<TemplateField, GetTemplateFieldDtoV1>();
+            CreateMap<UpdateTemplateFieldDtoV1, TemplateField>();
         }
     }
 }
