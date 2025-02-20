@@ -1,24 +1,24 @@
 <form>
     <mat-form-field floatLabel="always">
         <mat-label>Field Name</mat-label>
-        <input matInput [(ngModel)]="field.name" name="name">
+        <input matInput [(ngModel)]="field.name" name="name" (ngModelChange)="onNgModelChange()">
     </mat-form-field>
     <mat-form-field floatLabel="always">
         <mat-label>Field Type</mat-label>
-        <mat-select required="true" [(ngModel)]="field.fieldType" name="fieldType">
+        <mat-select required="true" [(ngModel)]="field.fieldType" name="fieldType" (ngModelChange)="onNgModelChange()">
             <mat-option value="Input">Input</mat-option>
             <mat-option value="Calculated">Calculated</mat-option>
         </mat-select>
     </mat-form-field>
     <mat-form-field *ngIf="field.fieldType === 'Input'">
         <mat-label>Default Value</mat-label>
-        <input matInput name="defaultValue">
+        <input matInput name="defaultValue" (ngModelChange)="onNgModelChange()">
     </mat-form-field>
     <mat-form-field *ngIf="field.fieldType === 'Calculated'">
         <mat-label>Formula</mat-label>
-        <input matInput name="formula">
+        <input matInput name="formula" (ngModelChange)="onNgModelChange()">
     </mat-form-field>
-    <button mat-fab>
+    <button mat-fab (click)="onClickDelete()">
         <mat-icon>delete</mat-icon>
     </button>
 </form>

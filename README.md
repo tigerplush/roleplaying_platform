@@ -23,3 +23,7 @@ You might have to call `npm install -g @angular/cli` once in order to install th
 
 I'm very unsure how this should be configured correctly, but for now it works.
 https://stackoverflow.com/questions/54796791/importing-keycloak-configuration-files-while-using-docker-compose
+
+## ToDo
+* replace ngFor and ngIf with @for and @if
+* switch templatefield to form group with validators (with form groups, don't use this.field but formgroup.value)

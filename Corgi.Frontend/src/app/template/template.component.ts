@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { TemplateFieldComponent } from "../template-field/template-field.component";
+import { GetTemplateFieldDtoV1 } from '../get-template-field-dto-v1';
 
 @Component({
   selector: 'app-template',
@@ -41,9 +42,22 @@ export class TemplateComponent {
     })
   }
 
+  onSave() {
+
+  }
+
   onAddField() {
     this.templateService.addTemplateField(this.template.id).subscribe({
       next: field => this.template.fields.push(field)
     });
+  }
+
+  onFieldDelete(value: GetTemplateFieldDtoV1) {
+    console.log("delete");
+  }
+
+  onFieldChange(value: GetTemplateFieldDtoV1) {
+
+    console.log("change");
   }
 }
