@@ -1,1 +1,11 @@
-<p>character works!</p>
+<div *ngIf="character !== undefined">
+    <h1>{{ character.name }} Template</h1>
+    <button mat-icon (click)="onDelete()"><mat-icon>delete</mat-icon></button>
+    <button mat-icon (click)="onSave()"><mat-icon>save</mat-icon></button>
+    <div class="fields">
+        @for(field of character.fields; track field.id) {
+            <!-- <app-template-field [field]="field" (onDelete)="onFieldDelete($event)" (onChange)="onFieldChange($event)"></app-template-field> -->
+            <label>{{field.name}}</label>
+        }
+    </div>
+</div>

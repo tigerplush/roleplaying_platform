@@ -27,10 +27,6 @@ export class CharacterOverviewComponent {
     })
   }
 
-  onSelect(value: GetCharacterDtoV1) {
-
-  }
-
   openNewCharacterDialog() {
     this.dialog.open(CreateCharacterDialogComponent);
   }

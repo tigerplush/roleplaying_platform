@@ -16,6 +16,10 @@ export class CharacterService {
     return this.http.get<CharacterResponseDtoV1>(`${environment.baseUrl}/${this.resource}`);
   }
 
+  getCharacterById(id: string) {
+    return this.http.get<GetCharacterDtoV1>(`${environment.baseUrl}/${this.resource}/${id}`);
+  }
+
   createNewCharacter(character: AddCharacterDtoV1) {
     return this.http.post<GetCharacterDtoV1>(`${environment.baseUrl}/${this.resource}`, character);
   }

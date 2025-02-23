@@ -5,12 +5,12 @@ import { MatDialog } from '@angular/material/dialog';
 import { CreateTemplateDialogComponent } from '../create-template-dialog/create-template-dialog.component';
 import { TemplateService } from '../../services/template.service';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { GetTemplateDtoV1 } from '../../models/get-template-dto-v1';
 
 @Component({
   selector: 'app-template-overview',
-  imports: [ CommonModule, MatButtonModule, MatIconModule ],
+  imports: [ CommonModule, MatButtonModule, MatIconModule, RouterModule ],
   templateUrl: './template-overview.component.html',
   styleUrl: './template-overview.component.scss'
 })
@@ -32,9 +32,5 @@ export class TemplateOverviewComponent {
 
   openNewTemplateDialog() {
     this.dialog.open(CreateTemplateDialogComponent);
-  }
-
-  onSelect(value: GetTemplateDtoV1) {
-    this.router.navigate(['/templates/' + value.id]);
   }
 }
