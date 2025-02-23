@@ -1,5 +1,8 @@
-﻿using Corgi.Backend.Models;
+﻿using AutoMapper;
+using Corgi.Backend.Dtos.v1;
+using Corgi.Backend.Models;
 using Corgi.Backend.Services.CharacterService;
+using Corgi.Backend.Services.TemplateService;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,9 +13,18 @@ namespace Corgi.Backend.Controllers
     public class CharactersController : ControllerBase
     {
         private readonly ICharacterService _characterService;
-        public CharactersController(ICharacterService characterService)
+        private readonly ITemplateService _templateService;
+        private readonly IMapper _mapper;
+
+        public CharactersController(
+            ICharacterService characterService
+            , ITemplateService templateService
+            , IMapper mapper
+            )
         {
             _characterService = characterService;
+            _templateService = templateService;
+            _mapper = mapper;
         }
 
         [HttpGet]
@@ -27,10 +39,17 @@ namespace Corgi.Backend.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Character>> AddCharacterAsync()
+        [ProducesResponseType(typeof(GetCharacterDtoV1), StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<GetCharacterDtoV1>> AddCharacterAsync(AddCharacterDtoV1 newCharacter)
         {
-            Character charcater = await _characterService.AddCharacterAsync();
-            return Ok(charcater);
+            Template template = await _templateService.GetTemplateByIdAsync(newCharacter.Template);
+            if(template == null)
+            {
+                return BadRequest();
+            }
+            Character character = await _characterService.AddCharacterAsync(template, newCharacter.Name);
+            return Ok(_mapper.Map<GetCharacterDtoV1>(character));
         }
     }
 }

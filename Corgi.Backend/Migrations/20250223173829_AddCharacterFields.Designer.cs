@@ -3,6 +3,7 @@ using System;
 using Corgi.Backend;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Corgi.Backend.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20250223173829_AddCharacterFields")]
+    partial class AddCharacterFields
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -58,9 +61,6 @@ namespace Corgi.Backend.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<Guid?>("CharacterId")
-                        .HasColumnType("uuid");
-
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
@@ -84,8 +84,6 @@ namespace Corgi.Backend.Migrations
                         .HasColumnType("text");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CharacterId");
 
                     b.HasIndex("OriginId");
 
@@ -184,10 +182,6 @@ namespace Corgi.Backend.Migrations
 
             modelBuilder.Entity("Corgi.Backend.Models.CharacterField", b =>
                 {
-                    b.HasOne("Corgi.Backend.Models.Character", null)
-                        .WithMany("Fields")
-                        .HasForeignKey("CharacterId");
-
                     b.HasOne("Corgi.Backend.Models.TemplateField", "Origin")
                         .WithMany()
                         .HasForeignKey("OriginId");
@@ -202,11 +196,6 @@ namespace Corgi.Backend.Migrations
                         .HasForeignKey("OwnerId");
 
                     b.Navigation("Owner");
-                });
-
-            modelBuilder.Entity("Corgi.Backend.Models.Character", b =>
-                {
-                    b.Navigation("Fields");
                 });
 
             modelBuilder.Entity("Corgi.Backend.Models.Template", b =>

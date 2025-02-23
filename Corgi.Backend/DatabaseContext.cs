@@ -7,6 +7,7 @@ namespace Corgi.Backend
     {
         public DbSet<User> Users { get; set; }
         public DbSet<Character> Characters { get; set; }
+        public DbSet<CharacterField> CharacterFields { get; set; }
         public DbSet<Template> Templates { get; set; }
         public DbSet<TemplateField> TemplateFields { get; set; }
 
@@ -18,6 +19,11 @@ namespace Corgi.Backend
         {
             modelBuilder
                 .Entity<TemplateField>()
+                .Property(e => e.FieldType)
+                .HasConversion<string>();
+
+            modelBuilder
+                .Entity<CharacterField>()
                 .Property(e => e.FieldType)
                 .HasConversion<string>();
         }
