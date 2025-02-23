@@ -1,0 +1,19 @@
+<h2 mat-dialog-title>Create new Character</h2>
+<mat-dialog-content>
+    <mat-form-field>
+      <mat-label>Character name</mat-label>
+      <input matInput [(ngModel)]="name" />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Template</mat-label>
+      <mat-select required [(value)]="selectedTemplate">
+        @for(template of templates; track template.id) {
+            <mat-option [value]="template.id">{{ template.name }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button mat-button [mat-dialog-close]>Cancel</button>
+    <button mat-button (click)="onConfirm()" cdkFocusInitial>Confirm</button>
+</mat-dialog-actions>

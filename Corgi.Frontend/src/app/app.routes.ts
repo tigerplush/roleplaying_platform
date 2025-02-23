@@ -7,6 +7,8 @@ import { canActivateAuthRole } from './guards/auth.guard';
 import { TemplateComponent } from './components/template/template.component';
 import { TemplateOverviewComponent } from './components/template-overview/template-overview.component';
 import { AfterLoginComponent } from './components/after-login/after-login.component';
+import { CharacterOverviewComponent } from './components/character-overview/character-overview.component';
+import { CharacterComponent } from './components/character/character.component';
 
 export const routes: Routes = [
     {
@@ -30,7 +32,13 @@ export const routes: Routes = [
     },
     {
         path: 'characters',
-        component: NotFoundComponent,
+        component: CharacterOverviewComponent,
+        canActivate: [canActivateAuthRole],
+        data: { role: 'default-roles-corgi' }
+    },
+    {
+        path: 'characters/:id',
+        component: CharacterComponent,
         canActivate: [canActivateAuthRole],
         data: { role: 'default-roles-corgi' }
     },
