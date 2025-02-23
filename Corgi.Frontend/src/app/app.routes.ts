@@ -1,12 +1,12 @@
 import { Routes } from '@angular/router';
-import { HomeComponent } from './home/home.component';
-import { NotFoundComponent } from './not-found/not-found.component';
-import { ForbiddenComponent } from './forbidden/forbidden.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { canActivateAuthRole } from './auth.guard';
-import { AfterLoginComponent } from './after-login/after-login.component';
-import { TemplateComponent } from './template/template.component';
-import { TemplateOverviewComponent } from './template-overview/template-overview.component';
+import { HomeComponent } from './components/home/home.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
+import { ForbiddenComponent } from './components/forbidden/forbidden.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { canActivateAuthRole } from './guards/auth.guard';
+import { TemplateComponent } from './components/template/template.component';
+import { TemplateOverviewComponent } from './components/template-overview/template-overview.component';
+import { AfterLoginComponent } from './components/after-login/after-login.component';
 
 export const routes: Routes = [
     {

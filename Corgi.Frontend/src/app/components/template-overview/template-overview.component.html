@@ -1,0 +1,7 @@
+<h1>Templates</h1>
+@for(template of templates; track template.id) {
+    <button mat-fab (click)="onSelect(template)">{{template.name}}</button>
+}
+<button mat-icon-button (click)="openNewTemplateDialog()">
+    <mat-icon>add</mat-icon>
+</button>

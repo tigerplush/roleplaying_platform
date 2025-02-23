@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { UserService } from '../user.service';
 import { Router } from '@angular/router';
-import { AddUserDtoV1 } from '../add-user-dto-v1';
 import Keycloak from 'keycloak-js';
 import { catchError, finalize, of } from 'rxjs';
 import { MatProgressSpinnerModule  } from '@angular/material/progress-spinner';
+import { UserService } from '../../services/user.service';
+import { AddUserDtoV1 } from '../../models/add-user-dto-v1';
 
 @Component({
   selector: 'app-after-login',

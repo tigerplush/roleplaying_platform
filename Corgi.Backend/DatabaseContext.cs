@@ -53,7 +53,7 @@ namespace Corgi.Backend
                 {
                     lastModified.LastModified = DateTime.UtcNow;
                 }
-                if (entry.Entity is ICreatedAt createdAt)
+                if (entry.Entity is ICreatedAt createdAt && entry.State == EntityState.Added)
                 {
                     createdAt.CreatedAt = DateTime.UtcNow;
                 }

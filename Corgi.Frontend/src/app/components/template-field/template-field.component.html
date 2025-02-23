@@ -12,11 +12,11 @@
     </mat-form-field>
     <mat-form-field *ngIf="field.fieldType === 'Input'">
         <mat-label>Default Value</mat-label>
-        <input matInput name="defaultValue" (ngModelChange)="onNgModelChange()">
+        <input matInput name="defaultValue" [(ngModel)]="field.value" (ngModelChange)="onNgModelChange()">
     </mat-form-field>
     <mat-form-field *ngIf="field.fieldType === 'Calculated'">
         <mat-label>Formula</mat-label>
-        <input matInput name="formula" (ngModelChange)="onNgModelChange()">
+        <input matInput name="formula" [(ngModel)]="field.value" (ngModelChange)="onNgModelChange()">
     </mat-form-field>
     <button mat-fab (click)="onClickDelete()">
         <mat-icon>delete</mat-icon>

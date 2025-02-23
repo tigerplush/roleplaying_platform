@@ -84,9 +84,14 @@ namespace Corgi.Backend.Controllers
 
         [HttpPut("{templateId}/fields/{fieldId}")]
         [ProducesResponseType(typeof(GetTemplateFieldDtoV1), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<GetTemplateFieldDtoV1>> UpdateTemplateByIdAsync([FromRoute] Guid templateId, [FromRoute] Guid fieldId, UpdateTemplateFieldDtoV1 update)
         {
+            if(fieldId != update.Id)
+            {
+                return BadRequest();
+            }
             Template template = await _templateService.GetTemplateByIdAsync(templateId);
             if (template == null)
             {
@@ -97,7 +102,7 @@ namespace Corgi.Backend.Controllers
             {
                 return NotFound();
             }
-            await _templateService.UpdateTemplateFieldAsync(field, _mapper.Map<TemplateField>(update));
+            field = await _templateService.UpdateTemplateFieldAsync(field, _mapper.Map<TemplateField>(update));
             return Ok(_mapper.Map<GetTemplateFieldDtoV1>(field));
         }
 

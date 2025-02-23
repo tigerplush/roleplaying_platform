@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
-import { TemplateService } from '../template.service';
-import { GetTemplateDtoV1 } from '../get-template-dto-v1';
+import { TemplateService } from '../../services/template.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { TemplateFieldComponent } from "../template-field/template-field.component";
-import { GetTemplateFieldDtoV1 } from '../get-template-field-dto-v1';
+import { GetTemplateDtoV1 } from '../../models/get-template-dto-v1';
+import { GetTemplateFieldDtoV1 } from '../../models/get-template-field-dto-v1';
 
 @Component({
   selector: 'app-template',
@@ -30,6 +30,10 @@ export class TemplateComponent {
     if (id === null) {
       return;
     }
+    this.fetchTemplate(id);
+  }
+
+  fetchTemplate(id: string) {
     this.templateService.getTemplateById(id).subscribe({
       next: value => this.template = value,
       error: _ => this.router.navigate(['/not-found'])
@@ -53,11 +57,14 @@ export class TemplateComponent {
   }
 
   onFieldDelete(value: GetTemplateFieldDtoV1) {
-    console.log("delete");
+    this.templateService.deleteTemplateField(this.template.id, value.id).subscribe({
+      complete: () => this.fetchTemplate(this.template.id)
+    })
   }
 
   onFieldChange(value: GetTemplateFieldDtoV1) {
-
-    console.log("change");
+    this.templateService.updateTemplateField(this.template.id, value).subscribe({
+      complete: () => this.fetchTemplate(this.template.id)
+    });
   }
 }

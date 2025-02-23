@@ -1,4 +1,5 @@
-﻿using Corgi.Backend.Models;
+﻿using AutoMapper;
+using Corgi.Backend.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace Corgi.Backend.Services.TemplateService
@@ -7,7 +8,10 @@ namespace Corgi.Backend.Services.TemplateService
     {
         private readonly DatabaseContext _context;
 
-        public TemplateService(DatabaseContext context)
+        public TemplateService(
+            DatabaseContext context
+            , IMapper mapper
+            )
         {
             _context = context;
         }
@@ -36,7 +40,7 @@ namespace Corgi.Backend.Services.TemplateService
             return await _context
                 .Templates
                 .Where(template => template.Id == id)
-                .Include(template => template.Fields)
+                .Include(template => template.Fields.OrderBy(field => field.CreatedAt))
                 .FirstOrDefaultAsync();
         }
 
@@ -51,11 +55,11 @@ namespace Corgi.Backend.Services.TemplateService
             return template;
         }
 
-
         public async Task<Template[]> GetAllTemplatesAsync()
         {
             return await _context.Templates.ToArrayAsync();
         }
+
         public async Task<TemplateField> AddTemplateFieldToTemplateAsync(Template template)
         {
             TemplateField field = new()
@@ -66,6 +70,7 @@ namespace Corgi.Backend.Services.TemplateService
             await _context.SaveChangesAsync();
             return field;
         }
+
         public async Task<TemplateField> UpdateTemplateFieldAsync(TemplateField field, TemplateField update)
         {
             field.Name = update.Name;

@@ -3,10 +3,10 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialog } from '@angular/material/dialog';
 import { CreateTemplateDialogComponent } from '../create-template-dialog/create-template-dialog.component';
-import { GetTemplateDtoV1 } from '../get-template-dto-v1';
-import { TemplateService } from '../template.service';
+import { TemplateService } from '../../services/template.service';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { GetTemplateDtoV1 } from '../../models/get-template-dto-v1';
 
 @Component({
   selector: 'app-template-overview',

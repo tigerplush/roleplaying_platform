@@ -1,11 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { environment } from '../environments/environment';
-import { AddTemplateDtoV1 } from './add-template-dto-v1';
-import { GetTemplateDtoV1 } from './get-template-dto-v1';
-import { TemplateResponseDtoV1 } from './template-response-dto-v1';
-import { GetTemplateFieldDtoV1 } from './get-template-field-dto-v1';
-import { AddTemplateFieldDtoV1 } from './add-template-field-dto-v1';
+import { environment } from '../../environments/environment';
+import { AddTemplateDtoV1 } from '../models/add-template-dto-v1';
+import { AddTemplateFieldDtoV1 } from '../models/add-template-field-dto-v1';
+import { GetTemplateDtoV1 } from '../models/get-template-dto-v1';
+import { TemplateResponseDtoV1 } from '../models/template-response-dto-v1';
+import { GetTemplateFieldDtoV1 } from '../models/get-template-field-dto-v1';
 
 @Injectable({
   providedIn: 'root'
@@ -37,12 +37,12 @@ export class TemplateService {
   updateTemplateField(templateId: string, field: GetTemplateFieldDtoV1) {
     return this
       .http
-      .put<GetTemplateFieldDtoV1>(`${environment.baseUrl}/${templateId}/fields/${field.id}`, field);
+      .put<GetTemplateFieldDtoV1>(`${environment.baseUrl}${this.resource}/${templateId}/fields/${field.id}`, field);
   }
 
-  deleteTemplateField(templateId: string, field: GetTemplateFieldDtoV1) {
+  deleteTemplateField(templateId: string, fieldId: string) {
     return this
       .http
-      .delete(`${environment.baseUrl}/${templateId}/field/${field.id}`);
+      .delete(`${environment.baseUrl}${this.resource}/${templateId}/fields/${fieldId}`);
   }
 }

@@ -1,4 +1,4 @@
-import { AddTemplateDtoV1 } from './add-template-dto-v1';
+import { AddTemplateDtoV1 } from '../add-template-dto-v1';
 
 describe('AddTemplateDtoV1', () => {
   it('should create an instance', () => {

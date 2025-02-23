@@ -3,6 +3,7 @@ export class GetTemplateFieldDtoV1 {
         public id: string
         , public name: string
         , public fieldType: string
+        , public value: string
     ) {
     }
 }
