@@ -18,6 +18,12 @@ namespace Corgi.Backend.Services.CharacterService
             _mapper = mapper;
         }
 
+
+        public async Task<Character[]> GetAllCharactersAsync()
+        {
+            return await _context.Characters.ToArrayAsync();
+        }
+
         public async Task<Character> GetCharacterByIdAsync(Guid id)
         {
             return await _context

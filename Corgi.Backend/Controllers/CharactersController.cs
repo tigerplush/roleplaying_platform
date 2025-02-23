@@ -27,7 +27,21 @@ namespace Corgi.Backend.Controllers
             _mapper = mapper;
         }
 
+        [HttpGet()]
+        [ProducesResponseType(typeof(CharacterResponseDtoV1), StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<ActionResult<CharacterResponseDtoV1>> GetAllCharacterAsync()
+        {
+            Character[] characters = await _characterService.GetAllCharactersAsync();
+            return Ok(new CharacterResponseDtoV1()
+            {
+                Characters = _mapper.Map<GetCharacterDtoV1[]>(characters)
+            });
+        }
+
         [HttpGet("{id}")]
+        [ProducesResponseType(typeof(GetCharacterDtoV1), StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<GetCharacterDtoV1>> GetCharacterByIdAsync([FromRoute] Guid id)
         {
             Character character = await _characterService.GetCharacterByIdAsync(id);
