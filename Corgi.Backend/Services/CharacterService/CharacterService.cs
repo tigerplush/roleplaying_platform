@@ -22,8 +22,13 @@ namespace Corgi.Backend.Services.CharacterService
         {
             return await _context
                 .Characters
-                .FirstOrDefaultAsync(character => character.Id == id);
+                .Where(character => character.Id == id)
+                .Include(character => character.Template)
+                .Include(character => character.Fields.OrderBy(field => field.CreatedAt))
+                .ThenInclude(field => field.Origin)
+                .FirstOrDefaultAsync();
         }
+
         public async Task<Character> AddCharacterAsync(Template template, string name)
         {
             Character character = new()

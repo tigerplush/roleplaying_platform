@@ -8,7 +8,7 @@ namespace Corgi.Backend.Dtos.v1
         public string Name { get; set; }
         public User Owner { get; set; }
         public Guid Template { get; set; }
-        public List<GetTemplateFieldDtoV1> Fields { get; set; } = [];
+        public List<GetCharacterFieldDtoV1> Fields { get; set; } = [];
         public DateTime CreatedAt { get; set; }
         public DateTime LastModified { get; set; }
     }

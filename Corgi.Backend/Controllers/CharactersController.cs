@@ -27,15 +27,15 @@ namespace Corgi.Backend.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet]
-        public async Task<ActionResult<Character>> GetCharacterByIdAsync()
+        [HttpGet("{id}")]
+        public async Task<ActionResult<GetCharacterDtoV1>> GetCharacterByIdAsync([FromRoute] Guid id)
         {
-            Character character = await _characterService.GetCharacterByIdAsync(Guid.NewGuid());
+            Character character = await _characterService.GetCharacterByIdAsync(id);
             if (character == null)
             {
                 return NotFound();
             }
-            return Ok(character);
+            return Ok(_mapper.Map<GetCharacterDtoV1>(character));
         }
 
         [HttpPost]
