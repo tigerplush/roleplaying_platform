@@ -1,6 +1,6 @@
 <h1>Characters</h1>
 @for(character of characters; track character.id) {
-    <button mat-fab (click)="onSelect(character)">{{character.name}}</button>
+    <button mat-fab [routerLink]="['/characters', character.id]">{{character.name}}</button>
 }
 <button mat-icon-button (click)="openNewCharacterDialog()">
     <mat-icon>add</mat-icon>
