@@ -6,4 +6,6 @@ export interface GetCharacterFieldDtoV1 {
     fieldType: FieldType;
     value: string;
     isVisible: boolean;
+
+    evaluate(): string;
 }
